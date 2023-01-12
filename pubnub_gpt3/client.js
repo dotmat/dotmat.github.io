@@ -20,12 +20,15 @@ var chatSPA = {
     },
     launcher: function(){
         console.log("ChatSPA is Launching.");
+        const myPubKey = $('meta[name=pubNubPubKey]').attr("content");
+        const mySubKey = $('meta[name=pubNubPubKey]').attr("content");
+        const myUserID = $('meta[name=userID]').attr("content");
 
         // Make the connection to PubNub
         var pubnubConstructorObject = {
-            subscribeKey: "mySubscribeKey",
-            publishKey: "myPublishKey",
-            userId: "myUniqueUserId",
+            subscribeKey: mySubKey,
+            publishKey: myPubKey,
+            userId: myUserID,
             heartbeatInterval: 0
         };
         chatSPA.pubnubClient = new PubNub(pubnubConstructorObject);
