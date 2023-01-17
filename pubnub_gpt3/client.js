@@ -59,6 +59,23 @@ var chatSPA = {
             message: function(messagePayload) {
                 // handle message
                 console.log('New message event, here is the object:', messagePayload);
+                // Check if the message is a type of text based message. 
+                if(messagePayload.message.content.type == 'text'){
+                    // If the message is from us, then display it on the left hand side
+                    // If the message is from GPTBot then display on the right
+                    // Manage all other messages in the else container. 
+                    if(messagePayload.message.sender == chatSPA.username){
+                        const messageHTML = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">'+messagePayload.message.content.message+'<span class="msg_time">9:00 AM, Today</span></div></div>';
+                    } else if(messagePayload.message.sender == "gpt3Bot"){
+                        const messageHTML = '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">'+messagePayload.message.content.message+'<span class="msg_time_send">9:05 AM, Today</span></div><div class="img_cont_msg"><img src="" class="rounded-circle user_img_msg"></div></div>';
+                    } else {
+
+                    }
+                    // Add the HTML to the page
+                    $('#chatSPAChatContainerBody').append(messageHTML);
+                } else {
+
+                }
             },
             presence: function(presenceEvent) {
                 // handle presence
