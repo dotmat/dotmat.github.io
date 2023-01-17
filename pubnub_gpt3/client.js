@@ -72,6 +72,7 @@ var chatSPA = {
 
                     }
                     // Add the HTML to the page
+                    console.log('Message HTML', messageHTML);
                     $('#messageConversationContainer').append(messageHTML);
                 } else {
 
