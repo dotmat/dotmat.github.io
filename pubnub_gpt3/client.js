@@ -36,7 +36,7 @@ var chatSPA = {
         // Connect to the chatbot channel for the conversation between this user and the chatbot.
         // In this example Im using dot notation for channel separation. You can find more details here:
         // https://www.pubnub.com/docs/general/channels/channel-naming
-        const chatbotChannel = "gpt3."+myUserID;
+        const chatbotChannel = "gpt3."+chatSPA.username;
 
         // Subscribe to PubNub to recieve messages.
         chatSPA.channelsArray.push("admin", chatbotChannel);
