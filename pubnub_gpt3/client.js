@@ -21,7 +21,7 @@ var chatSPA = {
     launcher: function(){
         console.log("ChatSPA is Launching.");
         const myPubKey = $('meta[name=pubNubPubKey]').attr("content");
-        const mySubKey = $('meta[name=pubNubPubKey]').attr("content");
+        const mySubKey = $('meta[name=pubNubSubKey]').attr("content");
         chatSPA.username = $('meta[name=userID]').attr("content");
 
         // Make the connection to PubNub
