@@ -54,14 +54,6 @@ var chatSPA = {
                 };
                 if (statusEvent.category === "PNReconnectedCategory") {
                     console.log('PubNub Issued a Reconnect Event');
-                    // If a reconnection event occurrs check the expiration time of the accessToken
-                    // This is done to ensure that if the client has been offline for a few days and the token gets expired make it seamless to get a reconnection event.
-                    // if(){
-                    //     // Access Token is Valid
-                    // } else {
-                    //     // Access Token is Invalid
-                    //     chatSPA.handleInvalidAccessToken();
-                    // };
                 };
             },
             message: function(messagePayload) {
