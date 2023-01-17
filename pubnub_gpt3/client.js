@@ -72,7 +72,7 @@ var chatSPA = {
 
                     }
                     // Add the HTML to the page
-                    $('#chatSPAChatContainerBody').append(messageHTML);
+                    $('#messageConversationContainer').append(messageHTML);
                 } else {
 
                 }
