@@ -22,13 +22,13 @@ var chatSPA = {
         console.log("ChatSPA is Launching.");
         const myPubKey = $('meta[name=pubNubPubKey]').attr("content");
         const mySubKey = $('meta[name=pubNubPubKey]').attr("content");
-        const myUserID = $('meta[name=userID]').attr("content");
+        chatSPA.username = $('meta[name=userID]').attr("content");
 
         // Make the connection to PubNub
         var pubnubConstructorObject = {
             subscribeKey: mySubKey,
             publishKey: myPubKey,
-            userId: myUserID,
+            userId: chatSPA.username,
             heartbeatInterval: 0
         };
         chatSPA.pubnubClient = new PubNub(pubnubConstructorObject);
@@ -43,13 +43,56 @@ var chatSPA = {
         chatSPA.pubnubClient.subscribe({
             channels: chatSPA.channelsArray,
         });
+
+        // Create Event Listeners for the App
+        chatSPA.pubnubClient.addListener({
+            status: function(statusEvent) {
+                if (statusEvent.category === "PNConnectedCategory") {
+                    console.log('Connected Event;', statusEvent);
+                    // Write the connected time to localStorage
+                    localStorage.setItem('connectedTime', statusEvent.currentTimetoken);
+                };
+                if (statusEvent.category === "PNReconnectedCategory") {
+                    console.log('PubNub Issued a Reconnect Event');
+                    // If a reconnection event occurrs check the expiration time of the accessToken
+                    // This is done to ensure that if the client has been offline for a few days and the token gets expired make it seamless to get a reconnection event.
+                    // if(){
+                    //     // Access Token is Valid
+                    // } else {
+                    //     // Access Token is Invalid
+                    //     chatSPA.handleInvalidAccessToken();
+                    // };
+                };
+            },
+            message: function(messagePayload) {
+                // handle message
+                console.log('New message event, here is the object:', messagePayload);
+            },
+            presence: function(presenceEvent) {
+                // handle presence
+                console.log('New presence event, here are the details', presenceEvent);
+            }
+        });
     },
     handleInputtedTextWindow: function(){
-        var messageToSend = "";
+        var messageToSend = $('#chatSPA-textInput').val();
+
 
         // Sent the message to the PN Channel.
+        var outgoingPubNubPayload = {
+            channel : "gpt3."+myUserID,
+            message : messageToSend, 
+            sendByPost: true, 
+            sender: chatSPA.username,
+        };
 
-        // Clear the message input box. 
+        chatSPA.pubnubClient.publish(outgoingPubNubPayload, function(status, response) {
+            console.log('PubNub Response:');
+            console.log(status, response);
+        });
+
+        // Clear the message input box.
+        $('#chatSPA-textInput').val('');
 
     },
     lazyAPIRequestToServer: function(resourceURL,messagePayload, requestType, successFunction, failureFunction){
