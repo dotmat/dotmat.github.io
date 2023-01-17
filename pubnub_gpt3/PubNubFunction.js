@@ -20,7 +20,7 @@ export default (initialRequest) => {
             'method': 'POST',
             'headers': {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer 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'
+            'Authorization': 'Bearer Token Goes here.'
             },
             'body': JSON.stringify({
                 "model": "text-davinci-003",
