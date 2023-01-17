@@ -83,7 +83,7 @@ var chatSPA = {
         // Sent the message to the PN Channel.
         var outgoingPubNubPayload = {
             channel : "gpt3."+chatSPA.username,
-            message : messageToSend, 
+            message : messageContainer, 
             sendByPost: true, 
             sender: chatSPA.username,
         };
