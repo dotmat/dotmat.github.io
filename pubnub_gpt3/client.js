@@ -73,6 +73,7 @@ var chatSPA = {
                 console.log('New presence event, here are the details', presenceEvent);
             }
         });
+        $("#chatSPA-textInput").keyup(function(event) {if (event.keyCode === 13) {chatSPA.handleInputtedTextWindow();};});
     },
     handleInputtedTextWindow: function(){
         var messageToSend = $('#chatSPA-textInput').val();
