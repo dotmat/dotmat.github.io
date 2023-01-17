@@ -76,6 +76,7 @@ var chatSPA = {
     },
     handleInputtedTextWindow: function(){
         var messageToSend = $('#chatSPA-textInput').val();
+        var messageContainer = {"content": {"type": "text","message": messageToSend},"sender": chatSPA.username}
 
 
         // Sent the message to the PN Channel.
