@@ -32,33 +32,24 @@ var chatSPA = {
             heartbeatInterval: 0
         };
         chatSPA.pubnubClient = new PubNub(pubnubConstructorObject);
+
+        // Connect to the chatbot channel for the conversation between this user and the chatbot.
+        // In this example Im using dot notation for channel separation. You can find more details here:
+        // https://www.pubnub.com/docs/general/channels/channel-naming
+        const chatbotChannel = "gpt3."+myUserID;
+
+        // Subscribe to PubNub to recieve messages.
+        chatSPA.channelsArray.push("admin", chatbotChannel);
+        chatSPA.pubnubClient.subscribe({
+            channels: chatSPA.channelsArray,
+        });
     },
     handleInputtedTextWindow: function(){
         var messageToSend = "";
 
+        // Sent the message to the PN Channel.
 
-
-
-
-
-        chatSPA.pubnubClient.fire({
-            message: {
-                text: messageToSend
-            },
-            channel: 'openai',
-            sendByPost: true,
-        }).then((response) => {
-            console.log(response);
-        }).catch((error) => {
-            console.log(error);
-        });
-
-
-
-
-
-
-
+        // Clear the message input box. 
 
     },
     lazyAPIRequestToServer: function(resourceURL,messagePayload, requestType, successFunction, failureFunction){
