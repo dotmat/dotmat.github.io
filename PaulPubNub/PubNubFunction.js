@@ -67,7 +67,7 @@ export default (initialRequest) => {
             'method': 'POST',
             'headers': {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer'
+            'Authorization': 'Bearer '
             },
             'body': JSON.stringify({
                 "model": "text-davinci-003",
