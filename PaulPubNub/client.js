@@ -95,7 +95,7 @@ var paulSPA = {
 
         // Sent the message to the PN Channel.
         var outgoingPubNubPayload = {
-            channel : "gpt3."+paulSPA.username,
+            channel : "paul."+paulSPA.username,
             message : messageContainer, 
             sendByPost: true, 
             sender: paulSPA.username,
